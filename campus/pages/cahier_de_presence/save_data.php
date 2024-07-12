@@ -25,8 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $periode = 1; // Exemple de période par défaut
     $matiere = 'Mathématiques'; // Exemple de matière par défaut
     $professeur = 'John Doe'; // Exemple de professeur par défaut
-    $m_eleve = $matricule; // À remplir avec la valeur appropriée si disponible
-    $nom_eleve = $nom; // À remplir avec la valeur appropriée si disponible
     $etat = 1; // État présent par défaut
 
     // Vérifier que toutes les données nécessaires sont présentes
@@ -58,29 +56,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $pdo = new PDO($dsn, $username, $password);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $sql = "INSERT INTO appel (matricul, date, heure, periode, filiere, niveau, matiere, professeur, m_eleve, nom_eleve, etat)
-                VALUES (:matricule, :date, :heure, :periode, :filiere, :niveau, :matiere, :professeur, :m_eleve, :nom_eleve, :etat)";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':matricule', $matricule);
-        $stmt->bindParam(':date', $date);
-        $stmt->bindParam(':heure', $heure);
-        $stmt->bindParam(':periode', $periode);
-        $stmt->bindParam(':filiere', $filiere);
-        $stmt->bindParam(':niveau', $niveau);
-        $stmt->bindParam(':matiere', $matiere);
-        $stmt->bindParam(':professeur', $professeur);
-        $stmt->bindParam(':m_eleve', $m_eleve);
-        $stmt->bindParam(':nom_eleve', $nom_eleve);
-        $stmt->bindParam(':etat', $etat);
+        // Vérifier si l'étudiant existe
+        $sql_check = "SELECT COUNT(*) FROM etudiant WHERE matricule = :matricule AND filiere = :filiere AND niveau = :niveau";
+        $stmt_check = $pdo->prepare($sql_check);
+        $stmt_check->bindParam(':matricule', $matricule);
+        $stmt_check->bindParam(':filiere', $filiere);
+        $stmt_check->bindParam(':niveau', $niveau);
+        $stmt_check->execute();
+        $student_exists = $stmt_check->fetchColumn();
 
-        if ($stmt->execute()) {
-            $response = [
-                'status' => 'success',
-                'message' => 'Data received and saved successfully'
-            ];
-            echo json_encode($response);
+        if ($student_exists) {
+            // L'étudiant existe, insérer dans appel
+            $sql_insert = "INSERT INTO appel (matricul, date, heure, periode, filiere, niveau, matiere, professeur, m_eleve, nom_eleve, etat)
+                            VALUES (:matricule, :date, :heure, :periode, :filiere, :niveau, :matiere, :professeur, :m_eleve, :nom_eleve, :etat)";
+            $stmt_insert = $pdo->prepare($sql_insert);
+            $stmt_insert->bindParam(':matricule', $matricule);
+            $stmt_insert->bindParam(':date', $date);
+            $stmt_insert->bindParam(':heure', $heure);
+            $stmt_insert->bindParam(':periode', $periode);
+            $stmt_insert->bindParam(':filiere', $filiere);
+            $stmt_insert->bindParam(':niveau', $niveau);
+            $stmt_insert->bindParam(':matiere', $matiere);
+            $stmt_insert->bindParam(':professeur', $professeur);
+            $stmt_insert->bindParam(':m_eleve', $matricule); // Assuming m_eleve is same as matricule
+            $stmt_insert->bindParam(':nom_eleve', $nom);
+            $stmt_insert->bindParam(':etat', $etat);
+
+            if ($stmt_insert->execute()) {
+                $response = [
+                    'status' => 'success',
+                    'message' => 'Data received and saved successfully'
+                ];
+                echo json_encode($response);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Failed to save data']);
+            }
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'Failed to save data']);
+            // L'étudiant n'existe pas
+            echo json_encode(['status' => 'error', 'message' => 'Cet étudiant ne participe pas à cette séance']);
         }
     } catch (PDOException $e) {
         echo json_encode(['status' => 'error', 'message' => 'Database error: ' . $e->getMessage()]);

@@ -220,9 +220,13 @@ try {
                 <tbody>
                     <?php
                         try {
-                            $sql = "SELECT * FROM appel";
+                            $filiere = $cahier['filiere'];
+                            $niveau = $cahier['niveau'];
+                            $sql = "SELECT * FROM appel WHERE filiere = :filiere AND niveau = :niveau";
                             $stmt = $pdo->prepare($sql);
                             $stmt->execute();
+                            $stmt->bindParam(':filiere', $filiere, PDO::PARAM_STR);
+                            $stmt->bindParam(':niveau', $niveau, PDO::PARAM_STR);
 
                             $counter = 1;
                             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {

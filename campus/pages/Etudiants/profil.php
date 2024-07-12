@@ -141,7 +141,7 @@ try {
                 echo $age . ' ans';
             ?></p>
         </div>
-        <img src="<?php echo htmlspecialchars($etudiant['id_qr']); ?>" alt="Profile Picture" class="profile-pic">
+        <img src="<?php echo htmlspecialchars($etudiant['id_qr']); ?>" alt="Profile Picture" width="300" height="300">
         <div class="attendance">
             <div class="attendance-card">
                 <h3>4</h3>
