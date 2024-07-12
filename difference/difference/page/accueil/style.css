@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    body {
+      font-size: 14px;
+    }
+}
+  
+.navbare, .sidebar, .contenu-principal {
+    display: flex;
+}
+
+
+.chart-container {
+    width: 600px;
+    height: 300px;
+    margin: 0 auto;
+}
+
+
+
+
+ 

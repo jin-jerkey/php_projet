@@ -1,0 +1,27 @@
+<!-- Modal pour Calendrier des absences -->
+<div id="absenceModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Les absences</h2>
+        <p>Votre contenu ici...</p>
+    </div>
+</div>
+
+
+
+
+pour le scanner
+ <!-- Modal pour Faire l'appel -->
+ <div id="attendanceModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Scanner QR Code</h2>
+        <div class="container">
+            <video id="preview" width="600" height="400"></video>
+            <button id="start-button">Démarrer le scan</button>
+            <div id="result"></div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
+        <script src="scanner.js"></script>
+    </div>
+</div>

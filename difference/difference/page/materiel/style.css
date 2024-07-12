@@ -1,0 +1,51 @@
+/* Ajoutez ceci à votre fichier style.css */
+body {
+    font-family: Arial, sans-serif;
+}
+
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold; /* Mettez en gras les étiquettes pour plus de lisibilité */
+}
+
+input {
+    width: 90%;
+    padding: 10px; /* Ajustez la hauteur pour correspondre au padding des boutons */
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ccc; /* Ajout d'une bordure pour plus de contraste */
+    border-radius: 10px;
+}
+
+select {
+    width: 100%;
+    padding: 10px; /* Ajustez la hauteur pour correspondre au padding des boutons */
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ccc; /* Ajout d'une bordure pour plus de contraste */
+    border-radius: 10px;
+}
+
+
+ 
+
+button {
+    background-color: #4caf50;
+    color: white;
+    padding: 12px 20px; /* Ajustez la taille des boutons */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Ajout d'une transition pour un effet visuel au survol */
+}
+
+button:hover {
+    background-color: #d19ccd;
+}
+
+.error-message {
+    color: #ff0000;
+    margin-top: 10px; /* Ajout d'un espace supplémentaire en haut du message d'erreur */
+}

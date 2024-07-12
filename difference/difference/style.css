@@ -1,0 +1,144 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    body {
+      font-size: 14px;
+    }
+}
+  
+.navbare, .sidebar, .contenu-principal {
+    display: flex;
+}
+  
+.navbare {
+    background-color: #000;
+    color: #fff;
+}
+
+.navbare h1 {
+    margin: 0;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.bouton-deconnexion {
+    margin-left: auto;
+    padding: 10px;
+    background-color: #ccc;
+    border: none;
+    cursor: pointer;
+}
+  
+.bouton-deconnexion:hover {
+    background-color: #ddd;
+}
+  
+ 
+  
+.contenu-principal {
+    width: 100%;
+    flex-direction: row;
+    float: right;
+    margin-bottom: 50px;
+}
+
+@media (max-width: 768px) {
+    .contenu-principal {
+      width: 100%;
+    }
+}
+
+.navbare {
+    height: 50px;
+    align-items: center;
+}
+  
+.sidebar {
+    padding: 10px;
+}
+  
+.contenu-principal {
+    padding: 20px;
+}
+
+
+
+
+.carousel-container {
+    width: 80%;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-slider {
+    display: flex;
+    transition: transform 5s ease-in-out;
+}
+
+.carousel-slide {
+    min-width: 100%;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: auto;
+}
+
+.prev-button,
+.next-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.prev-button {
+    left: 10px;
+}
+
+.next-button {
+    right: 10px;
+}
+
+
+.pied-de-page {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #070606;
+    text-align: center;
+    height: 50px;
+    color: #fff;
+    opacity: 85%;
+}
+
+@media (max-width: 768px) {
+    .pied-de-page {
+      text-align: left;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+  
